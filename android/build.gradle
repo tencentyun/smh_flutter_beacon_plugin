@@ -1,0 +1,65 @@
+group 'com.tencent.smh_flutter_beacon_plugin'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://mirrors.tencent.com/repository/maven/tencent_public/" }
+        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty" }
+
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+    }
+
+
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://mirrors.tencent.com/repository/maven/tencent_public/" }
+        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty" }
+
+        flatDir {
+            dirs project(':smh_flutter_beacon_plugin').file('libs')
+        }
+    }
+}
+
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'proguard-rules.pro'
+
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    packagingOptions {
+        doNotStrip "**/libqmp.so"
+        doNotStrip "**/libbeaconid.so"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+    }
+}
+dependencies {
+    implementation(name: 'beacon', ext: 'aar')
+    implementation(name: 'qimei', ext: 'aar')
+}

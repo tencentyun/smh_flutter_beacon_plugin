@@ -1,0 +1,27 @@
+name: smh_flutter_beacon_plugin
+description: beacon sdk for flutter
+version: 1.0.0
+author: garenwang
+publish_to: http://pub.oa.com
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ffi: ^1.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.tencent.smh_flutter_beacon_plugin
+        pluginClass: BeaconFlutterPlugin
+      ios:
+        pluginClass: BeaconFlutterPlugin
